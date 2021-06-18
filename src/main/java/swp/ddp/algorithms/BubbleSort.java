@@ -15,7 +15,6 @@ public class BubbleSort<T extends Comparable<T>> implements SortingAlgorithm<T>{
                     items.set(j-1, items.get(j));
                     items.set(j, temp);
                 }
-
             }
         }
     }
@@ -34,5 +33,10 @@ public class BubbleSort<T extends Comparable<T>> implements SortingAlgorithm<T>{
 
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return "Bubble Sort";
     }
 }

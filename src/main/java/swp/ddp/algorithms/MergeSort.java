@@ -12,4 +12,9 @@ public class MergeSort<T extends Comparable<T>> implements SortingAlgorithm<T>{
     public void sortInt(int[] items) {
 
     }
+
+    @Override
+    public String getName() {
+        return "Merge Sort";
+    }
 }

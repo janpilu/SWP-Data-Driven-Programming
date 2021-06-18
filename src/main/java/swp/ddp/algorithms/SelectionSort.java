@@ -12,4 +12,9 @@ public class SelectionSort<T extends Comparable<T>> implements SortingAlgorithm<
     public void sortInt(int[] items) {
 
     }
+
+    @Override
+    public String getName() {
+        return "Selection Sort";
+    }
 }
