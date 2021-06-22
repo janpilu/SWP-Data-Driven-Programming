@@ -15,6 +15,11 @@ public class Report {
         reportData=new TreeMap<>();
     }
 
+    public Report(String title) {
+        this.title=title;
+        reportData=new TreeMap<>();
+    }
+
     public String getTitle() {
         return title;
     }

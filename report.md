@@ -1,46 +1,46 @@
-# null+
+### Liste von wenigen Objekten mit großer Größe+
 null
-## Sortieren einer Liste (größer als CPU Cache)
-### Bubble Sort
+#### Sortieren einer Liste (größer als CPU Cache)
+##### Bubble Sort
 
 * Dauer: 
-* Durchschnitt: 0h 0m 2.23027E-4s
-* Min: 0h 0m 1.01383E-4s
-* Max: 0h 0m 0.001840084s
-* Datenmenge: 0.0021MB
-### Merge Sort
+* Durchschnitt: 0h 0m 0.282858486s
+* Min: 0h 0m 0.272775405s
+* Max: 0h 0m 0.495983517s
+* Datenmenge: 4.194328MB
+##### Merge Sort
 
 * Dauer: 
-* Durchschnitt: 0h 0m 4.11E-7s
-* Min: 0h 0m 3.04E-7s
-* Max: 0h 0m 1.377E-6s
-* Datenmenge: 0.0021MB
-### Selection Sort
+* Durchschnitt: 0h 0m 1.1E-7s
+* Min: 0h 0m 7.1E-8s
+* Max: 0h 0m 9.27E-7s
+* Datenmenge: 4.194328MB
+##### Selection Sort
 
 * Dauer: 
-* Durchschnitt: 0h 0m 5.52E-7s
-* Min: 0h 0m 4.14E-7s
-* Max: 0h 0m 1.78E-6s
-* Datenmenge: 0.0021MB
-## Sortieren einer Liste (kleiner als CPU Cache)
-### Bubble Sort
+* Durchschnitt: 0h 0m 9.7E-8s
+* Min: 0h 0m 7.1E-8s
+* Max: 0h 0m 4.87E-7s
+* Datenmenge: 4.194328MB
+#### Sortieren einer Liste (kleiner als CPU Cache)
+##### Bubble Sort
 
 * Dauer: 
-* Durchschnitt: 0h 0m 6.642E-6s
-* Min: 0h 0m 3.977E-6s
-* Max: 0h 0m 4.6495E-5s
-* Datenmenge: 0.001608MB
-### Merge Sort
+* Durchschnitt: 0h 0m 0.283960976s
+* Min: 0h 0m 0.272059179s
+* Max: 0h 0m 0.491875473s
+* Datenmenge: 4.193924MB
+##### Merge Sort
 
 * Dauer: 
-* Durchschnitt: 0h 0m 4.9E-7s
-* Min: 0h 0m 3.75E-7s
-* Max: 0h 0m 2.089E-6s
-* Datenmenge: 0.001608MB
-### Selection Sort
+* Durchschnitt: 0h 0m 1.18E-7s
+* Min: 0h 0m 7.6E-8s
+* Max: 0h 0m 8.52E-7s
+* Datenmenge: 4.193924MB
+##### Selection Sort
 
 * Dauer: 
-* Durchschnitt: 0h 0m 8.02E-7s
-* Min: 0h 0m 5.74E-7s
-* Max: 0h 0m 4.907E-6s
-* Datenmenge: 0.001608MB
+* Durchschnitt: 0h 0m 1.03E-7s
+* Min: 0h 0m 7.7E-8s
+* Max: 0h 0m 5.67E-7s
+* Datenmenge: 4.193924MB
