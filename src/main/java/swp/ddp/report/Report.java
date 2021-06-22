@@ -9,7 +9,7 @@ public class Report {
 
     String title;
     String comment;
-    Map<String ,List<ReportData>> reportData; // <algorithmName,<name/duration/description>>
+    Map<String ,List<ReportData>> reportData; // <title,<name/duration/description>>
 
     public Report() {
         reportData=new TreeMap<>();
