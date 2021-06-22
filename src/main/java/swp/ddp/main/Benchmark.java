@@ -27,12 +27,26 @@ public class Benchmark {
     public static List<Report> run(int cacheSize) {
         List<Report> reports = new ArrayList<>();
 
-        Report report = benchmarkWithObjects("Liste von vielen Objekten mit kleiner Größe",cacheSize,10);
+
+        Report report = benchmarkWithObjects("Liste von wenigen Objekten mit großer Größe",cacheSize,100);
         reports.add(report);
-        report = benchmarkWithObjects("Liste von wenigen Objekten mit großer Größe",cacheSize,50);
+        MDReporter.printReport(report);
+        System.out.println("Liste von wenigen Objekten mit großer Größe finished");
+
+        report = benchmarkWithObjects("Liste Objekten",cacheSize,50);
         reports.add(report);
-        //report = benchmarkWithInts("Array von int",cacheSize);
-        //reports.add(report);
+        MDReporter.printReport(report);
+        System.out.println("Liste Objekten finished");
+
+        report = benchmarkWithObjects("Liste von vielen Objekten mit kleiner Größe",cacheSize,10);
+        reports.add(report);
+        MDReporter.printReport(report);
+        System.out.println("Liste von vielen Objekten mit kleiner Größe finished");
+
+        report = benchmarkWithInts("Array von int",cacheSize);
+        reports.add(report);
+        MDReporter.printReport(report);
+        System.out.println("Array von int finished");
 
         return reports;
     }
@@ -40,10 +54,10 @@ public class Benchmark {
     public static Report benchmarkWithObjects(String title,int cacheSize, int arraySize){
         Report report = new Report(title);
         List<ComparableImpl> less = getComparableImplList(cacheSize,arraySize,true);
-        List<ReportData> reportData= runAlgorithms(less);
+        List<ReportData> reportData= runAlgorithms(less,cacheSize);
         report.addReportData("Sortieren einer Liste (kleiner als CPU Cache)",reportData);
         List<ComparableImpl> greater = getComparableImplList(cacheSize,arraySize,false);
-        reportData = runAlgorithms(greater);
+        reportData = runAlgorithms(greater,cacheSize);
         report.addReportData("Sortieren einer Liste (größer als CPU Cache)",reportData);
         return report;
     }
@@ -51,15 +65,15 @@ public class Benchmark {
     public static Report benchmarkWithInts(String title,int cacheSize){
         Report report = new Report(title);
         int[] less = getIntArray(cacheSize,true);
-        List<ReportData> reportData= runAlgorithmsInt(less);
+        List<ReportData> reportData= runAlgorithmsInt(less,cacheSize);
         report.addReportData("Sortieren einer Liste (kleiner als CPU Cache)",reportData);
         int[] greater = getIntArray(cacheSize,false);
-        reportData = runAlgorithmsInt(greater);
+        reportData = runAlgorithmsInt(greater,cacheSize);
         report.addReportData("Sortieren einer Liste (größer als CPU Cache)",reportData);
         return report;
     }
 
-    public static List<ReportData> runAlgorithms(List<ComparableImpl> data){
+    public static List<ReportData> runAlgorithms(List<ComparableImpl> data,int cacheSize){
 
         List<ReportData> reportData = new ArrayList<>();
         List<SortingAlgorithm<ComparableImpl>> algorithms = new ArrayList<>();
@@ -72,6 +86,7 @@ public class Benchmark {
             SortingAlgorithm<ComparableImpl> current =algorithms.get(i);
             ArrayList<Long> durations = new ArrayList<>();
             for(int j =0;j<30;j++){
+                clearCache(cacheSize);
                 long start = System.nanoTime();
                 current.sort(data);
                 long finish = System.nanoTime();
@@ -82,13 +97,21 @@ public class Benchmark {
             long max = Collections.max(durations);
             long avg = durations.stream().collect(Collectors.summingLong(l->l))/durations.size();
             int size = data.stream().collect(Collectors.summingInt(s->s.getSizeBytes()));
-            currentRun = new ReportData(current.getName(),"",nanoToString(avg),nanoToString(min),nanoToString(max),bytesToString(size));
+            currentRun = new ReportData(current.getName(),"",nanoToString(avg),nanoToString(min),nanoToString(max),bytesToString(size),arraySizeToString(data.size()),elementSizeToString(data.get(1).getSizeBytes()));
             reportData.add(currentRun);
         }
         return reportData;
     }
 
-    public static List<ReportData> runAlgorithmsInt(int[] data){
+    public static String arraySizeToString(int i){
+        return i+" Elemente";
+    }
+
+    public static String elementSizeToString(int i){
+        return i+" B";
+    }
+
+    public static List<ReportData> runAlgorithmsInt(int[] data,int cacheSize){
 
         List<ReportData> reportData = new ArrayList<>();
         List<SortingAlgorithm<ComparableImpl>> algorithms = new ArrayList<>();
@@ -101,6 +124,7 @@ public class Benchmark {
             SortingAlgorithm<ComparableImpl> current =algorithms.get(i);
             ArrayList<Long> durations = new ArrayList<>();
             for(int j =0;j<30;j++){
+                clearCache(cacheSize);
                 long start = System.nanoTime();
                 current.sortInt(data);
                 long finish = System.nanoTime();
@@ -111,7 +135,7 @@ public class Benchmark {
             long max = Collections.max(durations);
             long avg = durations.stream().collect(Collectors.summingLong(l->l))/durations.size();
             int size = data.length*4;
-            currentRun = new ReportData(current.getName(),"",nanoToString(avg),nanoToString(min),nanoToString(max),bytesToString(size));
+            currentRun = new ReportData(current.getName(),"",nanoToString(avg),nanoToString(min),nanoToString(max),bytesToString(size),arraySizeToString(data.length),elementSizeToString(4));
             reportData.add(currentRun);
         }
         return reportData;
@@ -159,5 +183,11 @@ public class Benchmark {
 
     private static void printReport(List<Report> reports) {
         MDReporter.printReport(reports);
+    }
+
+    private static void clearCache(int cacheSize){
+        byte[] src = new byte[cacheSize];
+        byte[] target = new byte[src.length];
+        System.arraycopy(src,0,target,0,src.length);
     }
 }

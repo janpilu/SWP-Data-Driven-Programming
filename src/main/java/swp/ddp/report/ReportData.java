@@ -7,14 +7,18 @@ public class ReportData {
     private String durationMin;
     private String durationMax;
     private String size;
+    private String arraySize;
+    private String elementSize;
 
-    public ReportData(String name, String description, String durationAvg,String durationMin,String durationMax, String size) {
+    public ReportData(String name, String description, String durationAvg,String durationMin,String durationMax, String size,String arraySize,String elementSize) {
         this.name = name;
         this.description = description;
         this.durationAvg = durationAvg;
         this.durationMin = durationMin;
         this.durationMax = durationMax;
         this.size = size;
+        this.arraySize=arraySize;
+        this.elementSize=elementSize;
     }
 
     public String getName() {
@@ -63,5 +67,21 @@ public class ReportData {
 
     public void setDurationMax(String durationMax) {
         this.durationMax = durationMax;
+    }
+
+    public String getArraySize() {
+        return arraySize;
+    }
+
+    public void setArraySize(String arraySize) {
+        this.arraySize = arraySize;
+    }
+
+    public String getElementSize() {
+        return elementSize;
+    }
+
+    public void setElementSize(String elementSize) {
+        this.elementSize = elementSize;
     }
 }
