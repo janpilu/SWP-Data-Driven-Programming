@@ -121,6 +121,7 @@ public class Benchmark {
         double seconds = (double)nano / 1000000000.0;
         int minutes = (int) (seconds/60)%60;
         int hours = (int) (seconds/(60*60));
+        seconds = seconds%60;
         return hours+"h "+minutes+"m "+seconds+"s";
     }
 
